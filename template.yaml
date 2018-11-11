@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+
+Description: A serverless demopage to demonstrate how faces in pictures can be blurred using Amazon Rekognition and AWS Lambda.
+
+Resources:
+  DetectTextInImage:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: function.handler
+      Runtime: python3.6
+      CodeUri: s3://marek-serverless/lambda-image-blur.zip
+      Description: A serverless demopage to demonstrate how faces in pictures can be blurred using Amazon Rekognition and AWS Lambda.
+      MemorySize: 512
+      Timeout: 10
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - 'rekognition:DetectFaces'
+              Resource: '*'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: '/'
+            Method: GET
+      Tracing: Active
+      ReservedConcurrentExecutions: 3
+Outputs:
+  WebInterface:
+    Value: { "Fn::Sub" : "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"}
