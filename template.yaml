@@ -3,6 +3,18 @@ Transform: 'AWS::Serverless-2016-10-31'
 
 Description: A serverless demopage to demonstrate how faces in pictures can be blurred using Amazon Rekognition and AWS Lambda.
 
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: lambda-image-blur
+    Description: A demopage to demonstrate how faces in pictures can be blurred using Amazon Rekognition. You will have access to your own blurring service running behind an API Gateway which you can use as a base for your own anonymizing solution.
+    Author: Marek Kuczynski
+    SpdxLicenseId: Apache-2.0
+    ReadmeUrl: README.md
+    Labels: ['rekognition', 'demo', 'faces']
+    HomePageUrl: https://github.com/marekq/lambda-image-blur
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/marekq/lambda-image-blur
+
 Resources:
   DetectTextInImage:
     Type: 'AWS::Serverless::Function'
