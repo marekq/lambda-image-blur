@@ -1,6 +1,5 @@
-import base64, boto3, random, time
+import base64, boto3, random, requests, time
 from PIL import Image, ImageFilter
-from botocore.vendored import requests
 from io import BytesIO
 
 rek     = boto3.client("rekognition")

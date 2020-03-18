@@ -8,10 +8,10 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: function.handler
-      Runtime: python3.6
-      CodeUri: s3://marek-serverless/lambda-image-blur.zip
+      Runtime: python3.8
+      CodeUri: lambda/
       Description: A serverless demopage to demonstrate how faces in pictures can be blurred using Amazon Rekognition and AWS Lambda.
-      MemorySize: 512
+      MemorySize: 256
       Timeout: 10
       Policies:
         - Version: '2012-10-17'
@@ -22,7 +22,7 @@ Resources:
               Resource: '*'
       Events:
         Api1:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: '/'
             Method: GET
@@ -30,4 +30,4 @@ Resources:
       ReservedConcurrentExecutions: 3
 Outputs:
   WebInterface:
-    Value: { "Fn::Sub" : "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"}
+    Value: { "Fn::Sub" : "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/"}
